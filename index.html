@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Library · Presentación Oficial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #6366f1;
+      --primary-dark: #3730a3;
+      --accent: #f59e0b;
+      --emerald: #10b981;
+      --bg: #0b0f19;
+      --surface: #111827;
+      --surface-card: #1f2937;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .brand-icon {
+      background: linear-gradient(135deg, var(--primary), #818cf8);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+    }
+
+    .brand-text h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: -2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 5rem 0 4rem;
+      position: relative;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(79, 70, 229, 0.15);
+      border: 1px solid rgba(79, 70, 229, 0.3);
+      border-radius: 100px;
+      color: #a5b4fc;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h2 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 3rem;
+    }
+
+    .tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Architecture Grid */
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 1.25rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .card h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .card-list {
+      margin-top: 1rem;
+      list-style: none;
+    }
+
+    .card-list li {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-list li::before {
+      content: '✓';
+      color: var(--emerald);
+      font-weight: bold;
+    }
+
+    /* Spec Principles */
+    .principles-box {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin-top: 1.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    th {
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .code-chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #a5b4fc;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        padding: 3rem 0 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav-bar">
+      <a href="#" class="brand">
+        <div class="brand-icon">📚</div>
+        <div class="brand-text">
+          <h1>Manager Library</h1>
+          <span>Ficha ADSO 3413974 · SDD</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#arquitectura">Arquitectura</a>
+        <a href="#reglas">Reglas de Dominio</a>
+        <a href="#especificacion">Constitución SDD</a>
+        <a href="#repositorios">Repositorios</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="badge">Prueba Técnica ADSO 3413974 · Spec-Driven Development</div>
+      <h2>Sistema Integral de Gestión de Biblioteca</h2>
+      <p>
+        Construido a partir de una especificación formal y traducido rigurosamente a una arquitectura limpia con
+        <strong>React</strong> en el frontend y <strong>PHP (Laravel)</strong> en el backend sobre <strong>PostgreSQL 16</strong>.
+      </p>
+
+      <div class="hero-tags">
+        <span class="tag">React 18 + Vite</span>
+        <span class="tag">PHP 8.2 + Laravel 11</span>
+        <span class="tag">PostgreSQL 16</span>
+        <span class="tag">Docker Compose</span>
+        <span class="tag">Hexagonal Architecture</span>
+      </div>
+    </section>
+
+    <!-- Architecture Grid -->
+    <section id="arquitectura">
+      <div class="section-title">
+        <h3>Pilares de la Solución</h3>
+        <p>Cumplimiento estricto de las especificaciones y principios de diseño hexagonal</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h4>SDD (Spec-Driven Development)</h4>
+          <p>
+            El desarrollo se rige por contratos e invariantes innegociables. El código traduce el spec de Python/.NET a Laravel sin perder ninguna regla de negocio.
+          </p>
+          <ul class="card-list">
+            <li>Contrato HTTP único bajo <span class="code-chip">/api/v1</span></li>
+            <li>Cuerpo de error uniforme y estructurado</li>
+            <li>Pruebas unitarias de invariantes</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">🔒</div>
+          <h4>Invariantes y Concurrencia</h4>
+          <p>
+            Control de concurrencia optimista (ADR-002) protegiendo el último ejemplar. Si dos préstamos colisionan, el motor garantiza la integridad.
+          </p>
+          <ul class="card-list">
+            <li>Restricción de rango <span class="code-chip">ck_book_available_range</span></li>
+            <li>Transacciones atómicas para descontar y crear líneas</li>
+            <li>Protección contra libros en saldo negativo</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h4>Valores Congelados y Reportes</h4>
+          <p>
+            Las líneas de préstamo congelan el título, ISBN y categoría en el momento exacto del préstamo (Art. VIII y ADR-004).
+          </p>
+          <ul class="card-list">
+            <li>El histórico no cambia si se renombra un libro</li>
+            <li>Cálculo de estados en tiempo de ejecución</li>
+            <li>Privacidad absoluta: sin exponer socios en el reporte</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section id="reglas">
+      <div class="section-title">
+        <h3>Reglas de Negocio Implementadas</h3>
+        <p>Invariantes validadas tanto en el dominio como en el motor de base de datos</p>
+      </div>
+
+      <div class="principles-box">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Regla</th>
+                <th>Definición</th>
+                <th>Mecanismo de Verificación</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>RN-1</strong></td>
+                <td>Disponibles entre 0 y total, siempre.</td>
+                <td><span class="code-chip">CHECK (0 &lt;= available_copies &lt;= total_copies)</span></td>
+              </tr>
+              <tr>
+                <td><strong>RN-2</strong></td>
+                <td>Plazo de préstamo de 14 días. Máx. 3 libros sin devolver por socio.</td>
+                <td>Cálculo de <span class="code-chip">due_at</span> a 14 días y validación de tope activo (422).</td>
+              </tr>
+              <tr>
+                <td><strong>RN-3</strong></td>
+                <td>Un socio con libros vencidos no puede pedir nuevos préstamos.</td>
+                <td>Inspección de líneas sin devolver con fecha expirada (409).</td>
+              </tr>
+              <tr>
+                <td><strong>RN-4</strong></td>
+                <td>Valores congelados en la línea no siguen al catálogo vivo.</td>
+                <td>Copia instantánea de título, ISBN y nombre de categoría en <span class="code-chip">loan_item</span>.</td>
+              </tr>
+              <tr>
+                <td><strong>RN-5</strong></td>
+                <td>Préstamos inmutables. Libros con baja lógica (<span class="code-chip">deleted_at</span>).</td>
+                <td>Un libro con préstamos abiertos no se da de baja (409).</td>
+              </tr>
+              <tr>
+                <td><strong>RN-6</strong></td>
+                <td>Fechas en instantes UTC. Respuestas y errores en español.</td>
+                <td>Estándar ISO 8601 UTC en backend y mensajes en español en frontend.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Repositories -->
+    <section id="repositorios">
+      <div class="section-title">
+        <h3>Ecosistema de los 6 Repositorios</h3>
+        <p>Estructura modular del proyecto para la ficha ADSO 3413974</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h4>test-manager-library-3413974-docs</h4>
+          <p>Especificación formal completa (spec Python y .NET), constitución, modelo de datos y ADRs.</p>
+        </div>
+        <div class="card">
+          <h4>test-manager-library-3413974-api</h4>
+          <p>Backend en PHP (Laravel 11), migraciones PostgreSQL, autenticación JWT y endpoints REST.</p>
+        </div>
+        <div class="card">
+          <h4>test-manager-library-3413974-app</h4>
+          <p>Frontend SPA en React 18 con Vite y Tailwind CSS. Catálogo, socios, préstamos y reportes.</p>
+        </div>
+        <div class="card">
+          <h4>test-manager-library-3413974-infra</h4>
+          <p>Contenedores Docker Compose con PostgreSQL 16 vacío, red y servicios integrados.</p>
+        </div>
+        <div class="card">
+          <h4>test-manager-library-3413974-tool</h4>
+          <p>Herramienta sembradora de datos que puebla el sistema mediante llamadas reales a la API.</p>
+        </div>
+        <div class="card">
+          <h4>test-manager-library-3413974-page</h4>
+          <p>Este portal estático de presentación pública, accesible en cualquier dispositivo sin requerir backend.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Manager Library · Ficha ADSO 3413974 · Servicio Nacional de Aprendizaje (SENA)</p>
+      <p style="margin-top: 6px; font-size: 0.75rem; color: #64748b;">
+        Desarrollado bajo metodología Spec-Driven Development (SDD)
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
